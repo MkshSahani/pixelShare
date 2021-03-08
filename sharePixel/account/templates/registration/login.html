@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_tag_add %}
+    <title> 
+        SharePixel
+    </title> 
+    <link relf="favicon" href="{% static 'images/favicon.jpeg' %}" /> 
+{% endblock %}
+
+{% block content %}
+
+    <div class="container border" style="padding:20px;width : 500px;margin-top : 80px;">
+        <img src="{% static 'images/favicon.jpeg' %}" style="height : 300px; width : 300px;border-radius:20px;margin-left : 80px;" /> 
+        <form method="post" action="." autocomplete="off" style="margin:50px;margin-left : 80px;">
+            {% csrf_token %}
+            <input type="text" for="username" name="username" placeholder="enter your username."  style="color:black;width : 300px;"  required /> <br /><br/>  
+            <input type="password" for="passwrod" name="password" placeholder="Password" style="color:black;width : 300px;" required /> <br/><br/> 
+            <button type="submit" style="border:2px solid black;border-radius:10px;width : 300px;background-color:#008080;color:white;">Login</button>  
+            <br/> <br/> 
+            <p style="margin-left : 80px;"><a href="#" style="text-decoration:None;">forgot password ?</a></p>  
+        </form>
+    </div> 
+
+    <div class="container border" style="padding:20px;width : 500px;margin-top : 50px;text-align:center;"> 
+        <p>Don't have an account ?  <a href="{% url 'signup' %}" style="text-decoration:None;">Sign up</a></p> 
+    </div> 
+
+{% endblock %}
