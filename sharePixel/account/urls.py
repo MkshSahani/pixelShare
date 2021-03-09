@@ -5,7 +5,8 @@ from .views import (
                     required_page, 
                     dashboard, 
                     register_user, 
-                    user_login
+                    user_login, 
+                    edit_profile
                 )
 
 
@@ -15,7 +16,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name="registration/logout.html"), name="logout"), 
     path('required_page/', required_page, name="RequiredPage"), 
     path('signup/', register_user, name="signup"), 
+    path('edit/', edit_profile, name="edit"), 
     path('',dashboard, name="dashboard"), 
+    
 ]
 
 

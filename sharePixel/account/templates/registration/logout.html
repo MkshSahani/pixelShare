@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block head_tag_add %}
+    <title> 
+        Logout
+    </title> 
+{% endblock %}
+
 {% block content %}
     <p> 
         logout sucess fully, <a href="{% url 'login' %}">login,</a> again. 

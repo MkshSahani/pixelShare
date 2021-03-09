@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1> 
-        dashboard <a href="{% url 'logout' %}">logout, </a> 
+        dashboard <a href="{% url 'logout' %}">logout, </a>
+        and please edit you profile 
+        <a href="{% url 'edit' %}"> edit </a>  
     </h1> 
 {% endblock %}
