@@ -1,10 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.models import User 
 from django.contrib.auth.decorators import login_required 
+from django.contrib.auth import authenticate, logout, login 
 
 # @func_name : base_render 
 def base_render(request): 
     return render(request, 'base.html', {}) 
+
+
+# @func_name : user_login 
+def user_login(request): 
+    context = {}
+    context['login_failed'] = False 
+    if request.method == "POST": 
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password) # authenticate user. 
+        if user is not None: 
+            if user.is_active: 
+                login(request, user) # start session with user. 
+                return redirect('') # redirect to home page. 
+        else:  
+            context['login_failed'] = True 
+            return render(request, 'registration/login.html', context) # login faild redirect to login page, with warning. 
+    else: 
+        return render(request, 'registratoin/login.html', context) # render login page.  
 
 
 # @func_name : register_user. 
