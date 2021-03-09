@@ -19,12 +19,12 @@ def user_login(request):
         if user is not None: 
             if user.is_active: 
                 login(request, user) # start session with user. 
-                return redirect('') # redirect to home page. 
+                return redirect('/account/') # redirect to home page. 
         else:  
             context['login_failed'] = True 
             return render(request, 'registration/login.html', context) # login faild redirect to login page, with warning. 
     else: 
-        return render(request, 'registratoin/login.html', context) # render login page.  
+        return render(request, 'registration/login.html', context) # render login page.  
 
 
 # @func_name : register_user. 
