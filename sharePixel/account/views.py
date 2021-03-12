@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth import authenticate, logout, login 
 from .forms import ProfileForm 
+from .models import Profile
 
 # @func_name : base_render 
 def base_render(request): 
@@ -38,6 +39,7 @@ def register_user(request):
         email_address = request.POST.get('emailAddress')
         print(username, password, email_address) # print data. 
         new_user = User.objects.create_user(username=username, password=password, email=email_address) # addnew user.  
+        new_profile = Profile.objects.create(user=new_user) # create a new profile. 
         context['new_user_added'] = True 
         context['new_user'] = new_user # store data of new_user. 
         return render(request, 'registration/signup.html', context) # render sucess registration. 
@@ -46,17 +48,22 @@ def register_user(request):
 
 
 # @func_name : edit_profile. 
+@login_required
 def edit_profile(request): 
     context = {}
     context['profile_updated'] = False 
     if request.method == "POST": 
-        profile_forms_data = ProfileForm(instance=request.user.profile, data = request.POST, file = request.FILES)
+        profile_forms_data = ProfileForm(instance=Profile.objects.get(user=request.user),data = request.POST, files = request.FILES)
         if profile_forms_data.is_valid(): 
             profile_forms_data.save()
             context['profile_updated'] = True 
-            return render(request, 'account/edit.html', context) 
+            return redirect('/account/')
+        else: 
+            profile_form = ProfileForm(instance=Profile.objects.get(user=request.user))
+            context['profile_form'] = profile_form
+            return render(request, 'account/edit.html', context)
     else: 
-        profile_form = ProfileForm(instance=request.user.profile)
+        profile_form = ProfileForm(instance=Profile.objects.get(user=request.user))
         context['profile_form'] = profile_form
         return render(request, 'account/edit.html', context)
 

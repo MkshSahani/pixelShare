@@ -5,6 +5,7 @@
     <title>
         EditProfile
     </title> 
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}" /> 
 {% endblock %}
 
 {% block content %}
@@ -14,14 +15,17 @@
             <form 
                 method="post" 
                 action="." 
-                autocomplete="off" > 
+                autocomplete="off" 
+                enctype="multipart/form-data"
+                > 
 
                 {{ profile_form.as_p }}
 
                 <button 
                     type="submit" >
                     submit 
-                </button>  
+                </button> 
+                {% csrf_token %} 
             </form> 
     
     </div> 

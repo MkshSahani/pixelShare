@@ -6,6 +6,6 @@ class ProfileForm(forms.ModelForm):
 
     class Meta: 
         model = Profile 
-        fields = ('date_of_birth', 'photo') # field of forms. 
+        fields = ('email_address', 'photo') # field of forms. 
 
-        
+         

@@ -18,7 +18,6 @@ urlpatterns = [
     path('signup/', register_user, name="signup"), 
     path('edit/', edit_profile, name="edit"), 
     path('',dashboard, name="dashboard"), 
-    
 ]
 
 
