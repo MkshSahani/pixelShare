@@ -6,12 +6,11 @@ class Images(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user_images", on_delete=models.CASCADE) 
     title = models.CharField(max_length=200) 
-    url = models.URLField()
     img = models.ImageField(upload_to='user_images') 
     description = models.TextField()
     created = models.DateTimeField(auto_now_add=True, db_index=True)
     user_liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_like', blank=True)
-
+    
 
     def save(self, *args, **kwargs): 
         if not self.slug: 
