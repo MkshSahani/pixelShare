@@ -7,6 +7,7 @@ from django.urls.resolvers import URLPattern
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')), # account urls. 
+    path('', include('images.urls')), # images urls.
 ]
 
 if settings.DEBUG:     
